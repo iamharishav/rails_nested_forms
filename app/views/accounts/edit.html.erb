@@ -1,0 +1,21 @@
+<%= form_for(@user, :url => account_path, :html => { :method => "put", :multipart => true, :class => "form-horizontal" }) do |f| %>
+  <% if @user.errors.full_messages.any? %>
+    <% @user.errors.full_messages.each do |error_message| %>
+      <%= error_message if @user.errors.full_messages.first == error_message %> <br />
+    <% end %>
+  <% end %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.fields_for :account do |a| %>
+    <%= a.label :first_name %>
+    <%= a.text_field :first_name %>
+    <%= a.label :last_name %>
+    <%= a.text_field :last_name %>
+  <% end %>
+
+  <%= f.submit "Update User" %>
+<% end %>
